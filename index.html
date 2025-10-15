@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <meta charset="utf-8">
+  <meta name="description" content="Rethinking Driving World Model as Synthetic Data Generator for Perception Tasks">
+  <meta name="keywords" content="Autonomous Driving, Driving World Model, Perception Tasks, Synthetic Data, Video Generation, Diffusion Model, DiT">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Rethinking Driving World Model as Synthetic Data Generator for Perception Tasks</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/pku_logo.png">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <!-- <h1 class="title is-1 publication-title">RAD: Training an End-to-End Driving Policy via Large-Scale</h1>
+          <h1 class="title is-1 publication-title"> 3DGS-based Reinforcement Learning</h1> -->
+          <h1 class="title is-1 publication-title" style="white-space: nowrap;">
+            <u>Rethinking</u> Driving World Model as
+          </h1>
+          <h1 class="title is-1 publication-title" style="white-space: nowrap;">
+            Synthetic Data Generator for Perception Tasks
+          </h1>
+          
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a>Kai Zeng</a><sup>1,*,◇</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?user=NXIYuY0AAAAJ">Zhanqian Wu</a><sup>2,*</sup>,</span>
+            <span class="author-block">
+              <a href="https://scholar.google.com.hk/citations?user=Kh01ChoAAAAJ">Kaixin Xiong</a><sup>2</sup>,</span>
+            <span class="author-block">
+              <a href="https://ucwxb.github.io/">Xiaobao Wei</a><sup>1,◇</sup>,
+            </span>
+            <span class="author-block">
+              <a>Xiangyu Guo</a><sup>3,◇</sup>,
+            </span>
+            <p></p>
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?user=NkJw6owAAAAJ">Zhenxin Zhu</a><sup>2</sup>,
+            </span>
+            <span class="author-block">
+              <a>Kalok Ho</a><sup>2</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?user=RYIXvAoAAAAJ">Lijun Zhou</a><sup>2</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?user=MHo_d3YAAAAJ">Bohan Zeng</a><sup>1</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://lu-m13.github.io/">Ming Lu</a><sup>2,†</sup>,
+            </span>
+            <p></p>
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?user=SYbFNsIAAAAJ">Haiyang Sun</a><sup>2,†</sup>,
+            </span>
+            <span class="author-block">
+              <a>Bing Wang</a><sup>2</sup>,
+            </span>
+            <span class="author-block">
+              <a>Guang Chen</a><sup>2</sup>,
+            </span>
+            <span class="author-block">
+              <a>Hangjun Ye</a><sup>2</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://zwt233.github.io/">Wentao Zhang</a><sup>1,✉</sup>,
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>Peking University</span>
+            <span class="author-block"><sup>2</sup>Xiaomi EV</span>
+            <span class="author-block"><sup>3</sup>Huazhong University of Science &amp; Technology</span>
+            <p></p>
+            <span class="author-block"><sup>*</sup>Equal Contribution.</span>
+            <span class="author-block"><sup>◇</sup>Intern of Xiaomi EV.</span>
+            <span class="author-block"><sup>†</sup>Project Leader.</span>
+            <span class="author-block"><sup>✉</sup>Corresponding Author.</span>
+
+          <!-- </div> -->
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href=""
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://github.com/wm-research/Dream4Drive"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Recent advancements in driving world models enable controllable generation of high-quality RGB videos or multimodal videos. 
+            Existing methods primarily focus on metrics related to generation quality and controllability. 
+            However, they often overlook the evaluation of downstream perception tasks, which are <b>really crucial</b> for the performance of autonomous driving. 
+            Existing methods usually leverage a training strategy that first pretrains on synthetic data and finetunes on real data, resulting in twice the epochs compared to the baseline (real data only). 
+            When we double the epochs in the baseline, the benefit of synthetic data becomes negligible.
+            To thoroughly demonstrate the benefit of synthetic data, we introduce Dream4Drive, a novel synthetic data generation framework designed for enhancing the downstream perception tasks.
+            Dream4Drive first decomposes the input video into several 3D-aware guidance maps and subsequently renders the 3D assets onto these guidance maps.
+            Finally, the driving world model is fine-tuned to produce the edited, multi-view photorealistic videos, which can be used to train the downstream perception models.
+            Dream4Drive enables unprecedented flexibility in generating multi-view corner cases at scale, significantly boosting corner case perception in autonomous driving. 
+            To facilitate future research, we also contribute a large-scale 3D asset dataset named DriveObj3D, covering the typical categories in driving scenarios and enabling diverse 3D-aware video editing.
+            We conduct comprehensive experiments to show that Dream4Drive can effectively boost the performance of downstream perception models under various training epochs.<br><br><br>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3" style="white-space: nowrap; display: inline-block;">Motivation</h2>
+    <div class="content has-text-justified">
+      <!-- We argue that the data augmentation experiments of previous methods (例如panacea、subjectdrive) are unfair, as they usually leverage a training strategy that first pretrains on synthetic data and finetunes on real data, resulting in twice the epochs compared to the baseline (real data only). We find that, under the same number of training epochs, large amounts of synthetic datasets offer little to no advantage and can even perform worse than using real data alone. As shown in 下图, under the 2× epoch setting, models trained exclusively on real data achieve higher mAP and NDS compared to those trained on real and synthetic data. -->
+      <!-- 翻译上面段落 -->
+      Previous methods (e.g., Panacea, SubjectDrive) often employ a training strategy that first pretrains on synthetic data and then fine-tunes on real data, resulting in double the training epochs compared to using only real data. We find that when the total number of training epochs is kept the same, large amounts of synthetic data provide little to no advantage and can even lead to worse performance than using only real data. As shown in the figure below, under the 2× epoch setting, models trained exclusively on real data achieve higher mAP and NDS compared to those trained on both real and synthetic data.
+
+
+    </div>
+    <img src="./static/images/teaser.png">
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3" style="white-space: nowrap; display: inline-block;">Framework</h2>
+    <div class="content has-text-justified">
+      To reevaluate the value of synthetic data, we introduce Dream4Drive, a novel 3D-aware synthetic data generation framework designed for downstream perception tasks.
+      The core idea of Dream4Drive is to first decompose the input
+      video into several 3D-aware guidance maps and subsequently render 3D assets onto these guidance maps.
+      Finally, the driving world model is fine-tuned to produce the edited, multi-view photorealistic videos, which can be used to train downstream perception models.
+      Consequently, we can incorporate various assets with different trajectories (e.g., viewpoints, poses, and distances) into the same scene, significantly improving the geometric and appearance diversity of the synthetic data while ensuring consistency between annotations and videos.
+      As shown in the figure above, under identical training epochs (1×, 2×, or 3×), our method requires only 420 synthetic samples—less than 2% of the real samples—to outperform prior augmentation methods.
+    </div>
+    <img src="./static/images/overview.png">
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3" style="white-space: nowrap; display: inline-block;">3D-aware scene editing</h2>
+    <div class="content has-text-justified">
+      Given the input images, we first obtain the depth map, normal map, and edge map for the background. For a target 3D asset, we position it within the 3D space of the original video based on the provided 3D bounding boxes. For each frame and each view, we then use calibrated camera intrinsics and extrinsics to render the target 3D asset. This process yields the object image and object mask, which are then used to edit the original depth, normal, and edge maps.
+    </div>
+    <img src="./static/images/asset_placement.png">
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3" style="white-space: nowrap; display: inline-block;">3D-aware video rendering</h2>
+    <div class="content has-text-justified">
+      Once we have obtained the depth map, normal map, and edge map for the background, as well as the rendered object image and object mask for the target 3D asset, we utilize a fine-tuned driving world model to render the edited video based on these 3D-aware guidance maps.
+      This 3D-aware scene editing pipeline effectively utilizes the accurate pose, geometry, and texture information provided by 3D assets, ensuring geometric consistency in the results generated. Notably, our method does not depend on 3D bounding box embeddings for controlling object placement. Instead, we directly edit in 3D space, offering a more intuitive and reliable way to manage control.
+    </div>
+    <img src="./static/images/DiT.png">
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3" style="white-space: nowrap; display: inline-block;">DriveObj3D</h2>
+    <div class="content has-text-justified">
+      To support large-scale downstream driving tasks, we propose a simple 3D asset generation pipeline and construct a diverse asset dataset, DriveObj3D, covering a wide range of categories in driving scenarios to support insertion tasks.
+    </div>
+    <img src="./static/images/3d_assets.png">
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3" style="white-space: nowrap; display: inline-block;">The inference process of original inpainting and asset insertion</h2>
+    <div class="content has-text-justified">
+      <!-- 从上到下依次是5种3D-aware guidance maps (depth, normal, edge, object image, object mask)、原始的condition images以及最后driving world model生成的结果视频。
+      翻译上面段落 -->
+      From top to bottom are the five types of 3D-aware guidance maps (depth, normal, edge, object image, object mask), the original condition images, and finally the result video generated by the driving world model.
+    </div>
+    <!-- 修改：垂直布局，间距40px，内容居中 -->
+    <div style="display: flex; flex-direction: column; gap: 40px; margin-top: 20px; align-items: center;">
+    
+      <!-- 第一个视频块 -->
+      <div style="text-align: center; width: 100%;">
+        <h3 class="title is-5">Original Inpainting</h3>
+        <video controls width="100%">
+          <source src="./static/videos/inpainting_condition.mp4" type="video/mp4">
+        </video>
+      </div>
+
+      <!-- 第二个视频块 -->
+      <div style="text-align: center; width: 100%;">
+        <h3 class="title is-5">Asset Insertion</h3>
+        <video controls width="100%">
+          <source src="./static/videos/insert_car_condition.mp4" type="video/mp4">
+        </video>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3" style="white-space: nowrap; display: inline-block;">Synthetic rare corner case</h2>
+    
+    <!-- 修改：垂直布局，间距40px，内容居中 -->
+    <div style="display: flex; flex-direction: column; gap: 40px; margin-top: 20px; align-items: center;">
+    
+      <!-- 第一个视频块 -->
+      <div style="text-align: center; width: 100%;">
+        <h3 class="title is-5">A large truck is inserted at close range in front</h3>
+        <video controls width="100%">
+          <source src="./static/videos/collision1_onerow.mp4" type="video/mp4">
+        </video>
+      </div>
+
+      <!-- 第二个视频块 -->
+      <div style="text-align: center; width: 100%;">
+        <h3 class="title is-5">A barrier is inserted in front and is about to collide with the vehicle</h3>
+        <video controls width="100%">
+          <source src="./static/videos/collision2_onerow.mp4" type="video/mp4">
+        </video>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3" style="white-space: nowrap; display: inline-block;">Videos of multiple asset class insertions</h2>
+    
+    <!-- 修改：垂直布局，间距40px，内容居中 -->
+    <div style="display: flex; flex-direction: column; gap: 40px; margin-top: 20px; align-items: center;">
+    
+      <!-- 第一个视频块 -->
+      <div style="text-align: center; width: 100%;">
+        <h3 class="title is-5">Insert the barrier on the left</h3>
+        <video controls width="100%">
+          <source src="./static/videos/insert_barrier.mp4" type="video/mp4">
+        </video>
+      </div>
+
+      <!-- 第二个视频块 -->
+      <div style="text-align: center; width: 100%;">
+        <h3 class="title is-5">Insert the traffic cone at left rear</h3>
+        <video controls width="100%">
+          <source src="./static/videos/insert_cone.mp4" type="video/mp4">
+        </video>
+      </div>
+
+      <!-- 第二个视频块 -->
+      <div style="text-align: center; width: 100%;">
+        <h3 class="title is-5">Insert the bus from behind</h3>
+        <video controls width="100%">
+          <source src="./static/videos/insert_bus.mp4" type="video/mp4">
+        </video>
+      </div>
+
+      <!-- 第二个视频块 -->
+      <div style="text-align: center; width: 100%;">
+        <h3 class="title is-5">Insert the construction vehicle from behind</h3>
+        <video controls width="100%">
+          <source src="./static/videos/insert_constr.mp4" type="video/mp4">
+        </video>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3" style="white-space: nowrap; display: inline-block;">Naive asset insertion vs. our generative approach</h2>
+    <!-- <div class="content has-text-justified">
+      Directly inserting 3D assets through projection cannot model factors such as lighting and shadows, resulting in inserted 3D assets that are inconsistent with the background images, affecting realism. Our method uses a diffusion model to generate the resulting video after inserting 3D assets, which can better integrate the inserted 3D assets with the background images, enhancing realism.
+    </div> -->
+    <img src="./static/images/insert_cmp.png">
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3">Effectiveness for Downstream Tasks</h2>
+    <!-- <div class="content has-text-justified">
+      We evaluate the effectiveness of Dream4Drive against prior driving world models, with detection and tracking results reported in the figure below. 
+      While Panacea and SubjectDrive outperform the real dataset baseline at double training epochs, aligning the training epochs shows minimal gains over using real data alone. 
+      In contrast, our method explicitly edits objects at specified 3D positions and leverages 3D-aware guidance maps to guide foreground-background synthesis, generating accurately annotated videos that consistently improve downstream perception models. 
+      Remarkably, with only 420 inserted samples, our approach outperforms prior methods that used the full set of synthetic data. 
+      Moreover, for the first time, synthetic data achieves performance that surpasses real data when training epochs are equal.
+    </div> -->
+    <div style="text-align: center; margin-bottom: 20px;">
+      <img src="./static/images/detection_256.png" alt="Detection 256">
+      <div style="margin-top: 8px; font-size: 1rem; color: #555;">Comparison of detection under different training epochs. * indicates the evaluation of WoVoGen is only on the vehicle classes of cars, trucks, and buses. <b>Bold</b> and <u>underline</u> indicate the best and second best.</div>
+    </div>
+    <div style="text-align: center;">
+      <img src="./static/images/tracking_256.png" alt="Tracking 256">
+      <div style="margin-top: 8px; font-size: 1rem; color: #555;">Comparison of tracking under different training epochs. <b>Bold</b> and <u>underline</u> indicate the best and second best.</div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3">Effectiveness for Various Resolutions</h2>
+    <!-- <div class="content has-text-justified">
+      Lidar Generation Comparison on nuScenes validation set, where green and blue represent the best and the second best values. "gt_img" and "gen_img" indicate using ground-truth or generated images as BEV condition input, respectively.
+    </div> -->
+    <div style="text-align: center;">
+      <img src="./static/images/detection_512.png" alt="Tracking 256">
+      <div style="margin-top: 8px; font-size: 1rem; color: #555;">Detection performance under different training epochs (1x, 2x, 3x). "Naive Insert" denotes the direct projection of 3D assets into the original scene. Results are reported at 512×768 resolution.</div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3">Detailed AP Metrics</h2>
+    <div class="content has-text-justified">
+      We provided a detailed presentation of the AP metrics across different training epochs at a resolution of 512×768.
+    </div>
+    <div style="text-align: center; margin-bottom: 20px;">
+      <img src="./static/images/epoch1.png" alt="Detection 256">
+      <div style="margin-top: 8px; font-size: 1rem; color: #555;">AP comparison across different categories for Real and Ours (+420) at 1× training epoch.</div>
+    </div>
+    <div style="text-align: center;">
+      <img src="./static/images/epoch2.png" alt="Tracking 256">
+      <div style="margin-top: 8px; font-size: 1rem; color: #555;">2× training epoch.</div>
+    </div>
+    <div style="text-align: center;">
+      <img src="./static/images/epoch3.png" alt="Tracking 256">
+      <div style="margin-top: 8px; font-size: 1rem; color: #555;">3× training epoch.</div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3">FID and FVD</h2>
+    <div class="content has-text-justified">
+      Quantitative comparison on video generation quality with other methods. Our method achieves the best FVD and FID score.
+    </div>
+    <img src="./static/images/FID_FVD.png">
+  </div>
+</section>
+
+<style>
+  .container.fixed-width {
+    max-width: 1000px; 
+    margin: 0 auto;
+  }
+  .title-container {
+    padding-left: 0px;  
+  }
+  .columns {
+    margin-top: 20px; 
+  }
+</style>
+
+<head>
+  <style>
+    .video-container-wrapper {
+      background-color: #f0f0f0; 
+      padding: 20px; 
+      border-radius: 5px; 
+    }
+
+    .video-container-wrapper video {
+      width: 100%; 
+      border-radius: 8px; 
+    }
+
+    .columns {
+      margin-bottom: 20px; 
+    }
+
+    .background-container {
+      background-color: #f0f0f0; 
+      padding: 30px; 
+      border-radius: 15px; 
+    }
+  </style>
+</head>
+
+
+
+<div style="margin-top: 30px;"></div>
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title is-3">BibTeX</h2>
+    <pre><code>@article{Dream4Drive,
+  title={Rethinking Driving World Model as Synthetic Data Generator for Perception Tasks},
+  author={Kai Zeng, Zhanqian Wu, Kaixin Xiong, Xiaobao Wei, Xiangyu Guo, Zhenxin Zhu, Kalok Ho, Lijun Zhou, Bohan Zeng, Ming Lu, Haiyang Sun, BING WANG, Guang Chen, Hangjun Ye, Wentao Zhang},
+  journal={arXiv preprint arXiv:},
+  year={2025}
+}</code></pre>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <a class="icon-link"
+         href="https://arxiv.org/abs/2310.08528">
+        <i class="fas fa-file-pdf"></i>
+      </a> 
+      <a class="icon-link" href="https://github.com/wm-research/Dream4Drive" class="external-link" disabled>
+        <i class="fab fa-github"></i>
+      </a>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website is licensed under a <a rel="license"
+                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+          <p>
+            The source code is borrowed from <a
+              href="https://github.com/nerfies/nerfies.github.io">Nerfies</a>,
+              We thank the authors for sharing the templates.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
