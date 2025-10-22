@@ -1,7 +1,7 @@
 <div align="center">
 <h3>Rethinking Driving World Model as Synthetic Data Generator for Perception Tasks</h3>
 
-Kai Zeng<sup>1,\*,◇</sup>, Zhanqian Wu<sup>2,*</sup>, Kaixin Xiong<sup>2</sup>, Xiaobao Wei<sup>1,◇</sup>, Xiangyu Guo<sup>3,◇</sup>, Zhenxin Zhu<sup>2</sup>, Kalok Ho<sup>2</sup>, Lijun Zhou<sup>2</sup>, Bohan Zeng<sup>1</sup>, Ming Lu<sup>2,†</sup>, Haiyang Sun<sup>2,†</sup>, Bing Wang<sup>2</sup>, Guang Chen<sup>2</sup>, Hangjun Ye<sup>2</sup>, Wentao Zhang<sup>1,✉</sup>
+Kai Zeng<sup>1,\*,◇</sup>, Zhanqian Wu<sup>2,*</sup>, Kaixin Xiong<sup>2</sup>, Xiaobao Wei<sup>1,◇</sup>, Xiangyu Guo<sup>3,◇</sup>, Zhenxin Zhu<sup>2</sup>, Kalok Ho<sup>2</sup>, Lijun Zhou<sup>2</sup>, Bohan Zeng<sup>1</sup>, Ming Lu<sup>2,†</sup>, Haiyang Sun<sup>2,†</sup>, Bing Wang<sup>2</sup>, Guang Chen<sup>2</sup>, Hangjun Ye<sup>2,✉</sup>, Wentao Zhang<sup>1,✉</sup>
 
 <sup>1</sup>  Peking University
 <sup>2</sup>  Xiaomi EV 
