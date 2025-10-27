@@ -10,7 +10,7 @@ Kai Zeng<sup>1,\*,◇</sup>, Zhanqian Wu<sup>2,*</sup>, Kaixin Xiong<sup>2</sup>
 (\*) Equal contribution. (◇) Intern of Xiaomi EV. (†) Project leader. (✉)Corresponding Author.
 
 <!-- 等arxiv的地址 -->
-<a href="https://www.arxiv.org/abs/2510.19195"><img src='https://img.shields.io/badge/arXiv-Dream4Drive-red' alt='Paper PDF'></a>
+<a href="https://arxiv.org/abs/2510.19195"><img src='https://img.shields.io/badge/arXiv-Dream4Drive-red' alt='Paper PDF'></a>
 <a href="https://wm-research.github.io/Dream4Drive/"><img src='https://img.shields.io/badge/Project_Page-Dream4Drive-green' alt='Project Page'></a>
 </div>
 
@@ -48,10 +48,10 @@ We conduct comprehensive experiments to show that Dream4Drive can effectively bo
 If you find Dream4Drive is useful in your research or applications, please consider giving us a star 🌟 and citing it by the following BibTeX entry.
 
 ```bibtex
-@article{Dream4Drive,
+@article{zeng2025rethinking,
   title={Rethinking Driving World Model as Synthetic Data Generator for Perception Tasks},
-  author={Kai Zeng, Zhanqian Wu, Kaixin Xiong, Xiaobao Wei, Xiangyu Guo, Zhenxin Zhu, Kalok Ho, Lijun Zhou, Bohan Zeng, Ming Lu, Haiyang Sun, BING WANG, Guang Chen, Hangjun Ye, Wentao Zhang},
-  url={https://www.arxiv.org/abs/2510.19195}, ,
+  author={Zeng, Kai and Wu, Zhanqian and Xiong, Kaixin and Wei, Xiaobao and Guo, Xiangyu and Zhu, Zhenxin and Ho, Kalok and Zhou, Lijun and Zeng, Bohan and Lu, Ming and others},
+  journal={arXiv preprint arXiv:2510.19195},
   year={2025}
 }
 ```
