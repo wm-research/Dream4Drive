@@ -1,5 +1,5 @@
 <div align="center">
-<h3>Rethinking Driving World Model as Synthetic Data Generator for Perception Tasks</h3>
+<h3> [🎉ICLR 2026!] Rethinking Driving World Model as Synthetic Data Generator for Perception Tasks</h3>
 
 Kai Zeng<sup>1,\*,◇</sup>, Zhanqian Wu<sup>2,*</sup>, Kaixin Xiong<sup>2</sup>, Xiaobao Wei<sup>1,◇</sup>, Xiangyu Guo<sup>3,◇</sup>, Zhenxin Zhu<sup>2</sup>, Kalok Ho<sup>2</sup>, Lijun Zhou<sup>2</sup>, Bohan Zeng<sup>1</sup>, Ming Lu<sup>2,†</sup>, Haiyang Sun<sup>2,†</sup>, Bing Wang<sup>2</sup>, Guang Chen<sup>2</sup>, Hangjun Ye<sup>2,✉</sup>, Wentao Zhang<sup>1,✉</sup>
 
@@ -35,7 +35,9 @@ We conduct comprehensive experiments to show that Dream4Drive can effectively bo
 </div>
 
 ## News
-<!-- `[2025/06/18]` [ArXiv](https://arxiv.org/abs/2506.07497) paper release. Models/Code are coming soon. Please stay tuned! ☕️ -->
+`[2026/01/26]` Dream4Drive is accepted by ICLR 2026🎉🎉🎉!
+
+`[2025/10/16]` [ArXiv](https://www.arxiv.org/abs/2509.23402) paper release. Models/Code are coming soon. Please stay tuned! ☕️
 
 ## Updates
 - [x] Release Paper   
